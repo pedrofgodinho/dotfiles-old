@@ -59,7 +59,7 @@ let g:rainbow_active = 1
 let g:airline_powerline_fonts = 1
 
 """ General nvim config """
-let mapleader = "ç"
+let mapleader = "\\"
 
 colorscheme vice
 
