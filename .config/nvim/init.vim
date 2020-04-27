@@ -5,17 +5,17 @@ Plug 'preservim/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'luochen1990/rainbow'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'bcicen/vim-vice'
 
 call plug#end()
 
-let mapleader = "ç"
-
 """ CoC setup """
 set hidden
+"set cmdheight=2
 
 " Some servers have issues with backup files
-set nobackup
-set nowritebackup
+" set nobackup
+" set nowritebackup
 
 set updatetime=300
 
@@ -59,7 +59,9 @@ let g:rainbow_active = 1
 let g:airline_powerline_fonts = 1
 
 """ General nvim config """
-set cmdheight=2
+let mapleader = "ç"
+
+colorscheme vice
 
 set number
 set linebreak
@@ -85,3 +87,15 @@ set undolevels=1000
 set backspace=indent,eol,start
 
 set mouse=a
+
+" Clipboard
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
