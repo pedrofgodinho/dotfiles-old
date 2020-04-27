@@ -1,0 +1,4 @@
+# Ignore everything in this directory except this file
+# This is added to allow an empty directory on the repository
+# MPD requires this folder to exist since it is defined as the playlist folder, even if empty
+!.gitignore
