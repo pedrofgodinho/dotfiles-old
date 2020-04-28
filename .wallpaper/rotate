@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for var in 1 2 3 4 5 6 7 8 9 10 11
+do
+    var2=`expr $var + 1`
+    echo "changed."
+    sleep 1 
+    echo "changing to $var2"
+    ./transition "wallpaper$var.jpeg" "wallpaper$var2.jpeg" transitions
+done
+sleep 1
+echo "changing to 1"
+./transition wallpaper1.jpeg wallpaper2.jpeg transitions

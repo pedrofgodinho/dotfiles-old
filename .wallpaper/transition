@@ -1,0 +1,147 @@
+#!/bin/sh
+
+usage() {
+    echo "Usage: "
+    echo "To generate the needed transition files: $0 generate file1 f1le2 transition_directory"
+    echo "To do the transition: $0 file1 file2 transition_directory"
+    exit
+}
+
+
+generate() {
+    echo "File1: $1"
+    echo "File2: $2"
+    echo "Saving files in $3"
+
+    no_path1="${1##*/}"
+    no_path2="${2##*/}"
+    no_ext1="${no_path1%.*}"
+    no_ext2="${no_path2%.*}"
+    folder="${3%/}"
+    result1="$folder/$no_ext1-$no_ext2"
+    result2="$folder/$no_ext2-$no_ext1"
+
+    echo -ne '[                    ](00%)\r'
+    
+    composite -dissolve 5 -gravity Center $1 $2 -alpha Set "$result1-5.jpeg"
+    echo -ne '[#                   ](05%)\r'
+    composite -dissolve 10 -gravity Center $1 $2 -alpha Set "$result1-10.jpeg"
+    echo -ne '[##                  ](10%)\r'
+
+    composite -dissolve 15 -gravity Center $1 $2 -alpha Set "$result1-15.jpeg"
+    echo -ne '[###                 ](15%)\r'
+    composite -dissolve 20 -gravity Center $1 $2 -alpha Set "$result1-20.jpeg"
+    echo -ne '[####                ](20%)\r'
+
+    composite -dissolve 25 -gravity Center $1 $2 -alpha Set "$result1-25.jpeg"
+    echo -ne '[####                ](25%)\r'
+    composite -dissolve 30 -gravity Center $1 $2 -alpha Set "$result1-30.jpeg"
+    echo -ne '[######              ](30%)\r'
+
+    composite -dissolve 35 -gravity Center $1 $2 -alpha Set "$result1-35.jpeg"
+    echo -ne '[#######             ](35%)\r'
+    composite -dissolve 40 -gravity Center $1 $2 -alpha Set "$result1-40.jpeg"
+    echo -ne '[########            ](40%)\r'
+
+    composite -dissolve 45 -gravity Center $1 $2 -alpha Set "$result1-45.jpeg"
+    echo -ne '[#########           ](45%)\r'
+
+    composite -dissolve 50 -gravity Center $1 $2 -alpha Set "$result1-50.jpeg"
+    cp "$result1-50.jpeg" "$result2-50.jpeg"
+    echo -ne '[##########          ](50%)\r'
+
+    composite -dissolve 55 -gravity Center $1 $2 -alpha Set "$result2-45.jpeg"
+    echo -ne '[###########         ](55%)\r'
+    composite -dissolve 60 -gravity Center $1 $2 -alpha Set "$result2-40.jpeg"
+    echo -ne '[############        ](60%)\r'
+
+    composite -dissolve 65 -gravity Center $1 $2 -alpha Set "$result2-35.jpeg"
+    echo -ne '[#############       ](65%)\r'
+    composite -dissolve 70 -gravity Center $1 $2 -alpha Set "$result2-30.jpeg"
+    echo -ne '[##############      ](70%)\r'
+
+    composite -dissolve 75 -gravity Center $1 $2 -alpha Set "$result2-25.jpeg"
+    echo -ne '[###############     ](75%)\r'
+    composite -dissolve 80 -gravity Center $1 $2 -alpha Set "$result2-20.jpeg"
+    echo -ne '[################    ](80%)\r'
+
+    composite -dissolve 85 -gravity Center $1 $2 -alpha Set "$result2-15.jpeg"
+    echo -ne '[#################   ](85%)\r'
+    composite -dissolve 90 -gravity Center $1 $2 -alpha Set "$result2-10.jpeg"
+    echo -ne '[##################  ](90%)\r'
+
+    composite -dissolve 95 -gravity Center $1 $2 -alpha Set "$result2-5.jpeg"
+    echo -e  '[####################](100%)'
+
+    echo 'Transitions saved.'
+    exit
+}
+
+
+transition() {
+    no_path1="${1##*/}"
+    no_path2="${2##*/}"
+    no_ext1="${no_path1%.*}"
+    no_ext2="${no_path2%.*}"
+    folder="${3%/}"
+    result1="$folder/$no_ext1-$no_ext2"
+    result2="$folder/$no_ext2-$no_ext1"
+
+    delay=0.05
+
+    feh --bg-fill "$result2-5.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-10.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-15.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-20.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-25.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-30.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-35.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-40.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-45.jpeg"
+    sleep $delay
+    feh --bg-fill "$result2-50.jpeg"
+    sleep $delay
+
+    feh --bg-fill "$result1-45.jpeg"
+    sleep $delay
+    feh --bg-fill "$result1-40.jpeg"
+    sleep $delay
+    feh --bg-fill "$result1-35.jpeg"
+    sleep $delay
+    feh --bg-fill "$result1-30.jpeg"
+    sleep $delay
+    feh --bg-fill "$result1-25.jpeg"
+    sleep $delay
+    feh --bg-fill "$result1-20.jpeg"
+    sleep $delay
+    feh --bg-fill "$result1-15.jpeg"
+    sleep $delay
+    feh --bg-fill "$result1-10.jpeg"
+    sleep $delay
+    feh --bg-fill "$result1-5.jpeg"
+    sleep $delay
+    feh --bg-fill $2
+
+    exit
+}
+
+
+if [ "$1" == "generate" ]; then
+    if [ -f "$2" ] && [ -f "$3" ] && [ -d "$4" ]; then
+        generate $2 $3 $4
+    fi
+else
+    if [ -f "$1" ] && [ -f "$2" ] && [ -d "$3" ]; then
+        transition $1 $2 $3
+    fi
+fi
+
+usage
