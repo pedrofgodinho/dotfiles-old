@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # VERY UGLY AND HARD CODED SCRIPT 
 # Make sure you generate the transition files between wallpaper1-wallpaper2, wallpaper2-wallpaper3 ... wallpaper11-wallpaper12, wallpaper12-wallpaper1
