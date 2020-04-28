@@ -1,6 +1,10 @@
 #!/bin/sh
 
 # VERY UGLY AND HARD CODED SCRIPT 
+# Make sure you generate the transition files between wallpaper1-wallpaper2, wallpaper2-wallpaper3 ... wallpaper11-wallpaper12, wallpaper12-wallpaper1
+# Otherwise this script won't work
+
+
 # kill previously running versions of the script
 # only works if the versions of the script were run with the same script_name
 script_name=${BASH_SOURCE[0]}

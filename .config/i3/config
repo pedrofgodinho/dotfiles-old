@@ -166,11 +166,11 @@ gaps outer -2
 smart_gaps on
 smart_borders on
 
-# fn keys
-exec --no-startup-id xbindkeys
-
 # wallpaper
 exec_always --no-startup-id ~/.wallpaper/wallpaper_timer > ~/.wallpaper/timer_logs
+
+# fn keys
+exec --no-startup-id xbindkeys
 
 # polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
