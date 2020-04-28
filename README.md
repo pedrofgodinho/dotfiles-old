@@ -118,7 +118,7 @@ Install the graphical environment and the things needed for my dotfiles to work:
     sudo pacman -S firefox ranger pcmanfm python python-pillow dmenu
     
     # Some other useful tools I use often
-    sudo pacman -S unzip p7zip tree neofetch wget lolcat fortune-mod cowsay
+    sudo pacman -S unzip p7zip tree neofetch wget lolcat fortune-mod cowsay cava
     yay -S ytop
     
     # Wallpaper rotation
