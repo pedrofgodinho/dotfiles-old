@@ -118,7 +118,7 @@ Install the graphical environment and the things needed for my dotfiles to work:
     sudo pacman -S firefox ranger pcmanfm python python-pillow dmenu
     
     # Some other useful tools I use often
-    sudo pacman -S unzip p7zip tree neofetch wget lolcat fortune-mod cowsay cava
+    sudo pacman -S unzip p7zip tree neofetch wget lolcat fortune-mod cowsay cava vlc
     yay -S ytop
     
     # Wallpaper rotation
@@ -164,7 +164,8 @@ Setup fstab to auto mount the windows partition:
 
 Setup neovim:
 
-    sudo pacman -S neovim
+    sudo pacman -S neovim xclip python-pynvim
+    yay -S python2-pynvim
     
     # Install vim-plug
     curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
