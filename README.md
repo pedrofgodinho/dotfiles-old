@@ -190,7 +190,7 @@ Theme lightdm:
 
 Install bumblebee for nvidia-optimus laptops:
 
-    sudo pacman -S bumblebee mesa nvidia xf86-video-intel lib32-virtualgl lib32-nvidia-utils
+    sudo pacman -S bumblebee mesa nvidia xf86-video-intel lib32-virtualgl lib32-nvidia-utils mesa-demos
     gpasswd -a pedro bumblebee
     sudo systemctl enable bumblebeed.service
     reboot
