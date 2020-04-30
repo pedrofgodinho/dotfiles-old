@@ -116,5 +116,9 @@ alias ytop='ytop -c vice'
 alias v='nvim'
 alias music='ncmpcpp'
 
+precmd() {
+    pwd > /tmp/whereami
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
