@@ -175,7 +175,6 @@ Setup neovim:
     
     # Open vim and execute :PlugInstall to install the plugins
     # Open vim and execute :PlugUpdate to update plugins
-    # Open vim and execute :CocInstall coc-pairs to install the pair autocomplete plugin
 
 Install stuff for music:
 

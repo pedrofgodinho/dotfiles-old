@@ -6,6 +6,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'luochen1990/rainbow'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'bcicen/vim-vice'
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -65,6 +66,7 @@ colorscheme vice
 " Spaces and Tabs
 set tabstop=4
 set softtabstop=4
+set shiftwidth=4
 set expandtab
 set smarttab
 
