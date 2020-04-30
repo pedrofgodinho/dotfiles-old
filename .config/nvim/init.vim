@@ -1,4 +1,4 @@
-""" Plugins """
+" ----- Plugins -----
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'preservim/nerdcommenter'
@@ -9,20 +9,20 @@ Plug 'bcicen/vim-vice'
 
 call plug#end()
 
-""" CoC setup """
+" --- CoC setup ---
 set hidden
-"set cmdheight=2
+set cmdheight=2
 
-" Some servers have issues with backup files
-" set nobackup
-" set nowritebackup
+" Some servers have issues with backup files. Uncomment this if you face such issues
+"set nobackup
+"set nowritebackup
 
 set updatetime=300
 
 set shortmess+=c
 
-" Always show signcolumn, to avoid shifting left and right when diagnostics appear/disappear
-" set signcolumn=yes
+" If using diagnostic tools, might want to enable this to avoid text shifting left and right all the time
+"set signcolumn=yes
 
 " Tab to cycle options
 inoremap <silent><expr> <TAB>
@@ -52,52 +52,56 @@ endfunction
 
 nmap <leader>rn <Plug>(coc-rename)
 
-""" Rainbow """
+" ----- Rainbow -----
 let g:rainbow_active = 1
 
-""" Airline Config """
+" ----- Airline Config -----
 let g:airline_powerline_fonts = 1
 
-""" General nvim config """
-let mapleader = "\\"
-
+" ----- General Vim Config -----
+syntax on
 colorscheme vice
 
-syntax on
-
-set number relativenumber
-set cursorline
-set linebreak
-set textwidth=120
-set showmatch
-set visualbell
-
-set hlsearch
-set smartcase
-set ignorecase
-set incsearch
+" Spaces and Tabs
+set tabstop=4
+set softtabstop=4
+set expandtab
+set smarttab
 
 set autoindent
-set expandtab
-set shiftwidth=4
 set smartindent
-set smarttab
-set softtabstop=4
 
-set ruler
-
-set undolevels=1000
 set backspace=indent,eol,start
 
+set textwidth=120
+
+" UI
+set number relativenumber
+set wildmenu
 set mouse=a
+set scrolloff=10
+
+" Search
+set showmatch
+set incsearch
+set hlsearch
+
+" Folding
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
+set foldmethod=indent
+nnoremap <space> za
+
+" Movement
+nnoremap j gj
+nnoremap k gk
 
 " Clipboard
-" " Copy to clipboard
 vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 
-" " Paste from clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
