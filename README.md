@@ -188,4 +188,12 @@ Theme lightdm:
     # Change background
     sudo lightdm-settings
 
+Install bumblebee for nvidia-optimus laptops:
+
+    sudo pacman -S bumblebee mesa nvidia xf86-video-intel lib32-virtualgl lib32-nvidia-utils
+    gpasswd -a pedro bumblebee
+    sudo systemctl enable bumblebeed.service
+    reboot
+
 This is all I've done so far to make my system what it is. Following along (adapted to your own seutp) and downloading my dotfiles should leave you with a clone of my own system. Good luck!
+
