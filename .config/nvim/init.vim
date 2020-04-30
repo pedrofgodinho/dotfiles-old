@@ -63,7 +63,10 @@ let mapleader = "\\"
 
 colorscheme vice
 
-set number
+syntax on
+
+set number relativenumber
+set cursorline
 set linebreak
 set textwidth=120
 set showmatch
