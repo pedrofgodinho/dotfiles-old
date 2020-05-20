@@ -23,7 +23,7 @@ In this section I'll be detailing exactly how I installed my system. A lot of th
     
     #Pacstrap
     mount /dev/sda3 /mnt
-    pacstrap /mnt base base-devel linux linux-firmware vim man-db man-pages texinfo dhcpcd wpa_supplicant dialog netctl
+    pacstrap /mnt base base-devel linux linux-firmware vim man-db man-pages texinfo networkmanager
     genfstab -U /mnt >> /mnt/etc/fstab
     arch-chroot /mnt
 
@@ -57,7 +57,7 @@ Once chrooted into the new installation:
     mount /dev/sdb3 /mnt
     #Install grub
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
-    #Change grub settings. In my case, I made grub remember the last choice. I also needed to add 'acpi_osi=! acpi_osi=\"Windows 2013\"' after quiet in GRUB_CMDLINE_LINUX_DEFAULT="quiet" for some hardware to work properly
+    #Change grub settings. In my case, I made grub remember the last choice. I also needed to add 'acpi_osi=! acpi_osi=\"Windows 2009\"' after quiet in GRUB_CMDLINE_LINUX_DEFAULT="quiet" for some hardware to work properly
     vim /etc/default/grub 
     grub-mkconfig -o /boot/grub/grub.cfg
     
@@ -67,12 +67,15 @@ Once chrooted into the new installation:
 On the installed system, we now add the sudo user:
 
     #Connect to the internet
-    wifi-menu
+    systemctl enable NetworkManager.service
+    systemctl start NetworkManager.service
+    nmtui
     
     #Install sudo
     pacman -S sudo
     #Add the sudo group
     groupadd sudo
+    #Edit /etc/sudoers to allow the sudo group
     #Add the user (-m to create home directory, -G to add to groups, -s to select shell)
     useradd -m -G sudo wheel -s /bin/bash pedro
     #Set user password
@@ -97,6 +100,7 @@ Sort pacman mirrors (maybe I should've done this earlier):
 
 Install yay for AUR management:
 
+    sudo pacman -S git
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
@@ -106,7 +110,7 @@ Install yay for AUR management:
 Install the graphical environment and the things needed for my dotfiles to work:
 
     # I selected noto fonts when asked
-    yay -S xorg xorg-xinit lightdm lightdm-slick-greeter i3-gaps kitty
+    yay -S xf86-video-intel xorg xorg-xinit lightdm lightdm-slick-greeter i3-gaps kitty noto-fonts
     # Change [Seat:*] to set greeter to lightdm-slick-greeter
     sudo vim /etc/lightdm/lightdm.conf
     sudo systemctl enable lightdm.service
@@ -150,6 +154,7 @@ Install zsh and oh-my-zsh
     #Download the zsh extensions I use
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
 Setup fstab to auto mount the windows partition:
 
@@ -159,7 +164,7 @@ Setup fstab to auto mount the windows partition:
     ln -s /windows_shared ~/shared
     
     # add to fstab
-    # UUID=replace_with_partition_uuid	/windows_shared	ntfs-3g		defaults,dmask=027,umask=137,uuid=1000,gid=1000	0 0
+    # UUID=replace_with_partition_uuid	/windows_shared	ntfs-3g		defaults,dmask=027,umask=137,uid=1000,gid=1000	0 0
     sudo vim /etc/fstab
 
 Setup neovim:
@@ -184,7 +189,7 @@ Install stuff for music:
 Theme lightdm:
 
     yay -S lightdm-settings
-    sudo cp ~/.wallpaper/wallpaper1.jpeg /usr/share/pixmap/wallpaper1.jpeg
+    sudo cp ~/.wallpaper/wallpaper1.jpeg /usr/share/pixmaps/wallpaper1.jpeg
     # Change background
     sudo lightdm-settings
 
