@@ -115,6 +115,7 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias ytop='ytop -c vice'
 alias v='nvim'
 alias music='ncmpcpp'
+[ -f ~/.pwn/script ] && source ~/.pwn/script
 
 precmd() {
     pwd > /tmp/whereami

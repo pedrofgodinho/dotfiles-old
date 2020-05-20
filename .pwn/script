@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+alias ctf='cd ~/shared/ctf/files'
+
+function pwn-start {
+    docker run -d \
+           --rm \
+           -h ${1} \
+           --name ${1} \
+           -v $(pwd)/${1}:/ctf/work \
+           -v $HOME/shared/ctf/glibc-all-in-one/libs:/ubuntu_libc \
+           -p 23946:23946 \
+           --cap-add=SYS_PTRACE \
+           skysider/pwndocker
+}
+
+function pwn-join {
+    docker exec -it ${1} /bin/bash
+} 
+
+function pwn-stop {
+    docker stop ${1}
+}
+
+alias ghidra='~/.pwn/ghidra/ghidraRun'
+
+alias binja='~/.pwn/binaryninja/binaryninja'
