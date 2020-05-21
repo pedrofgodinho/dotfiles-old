@@ -75,8 +75,6 @@ set smartindent
 
 set backspace=indent,eol,start
 
-set textwidth=120
-
 " UI
 set number relativenumber
 set wildmenu
