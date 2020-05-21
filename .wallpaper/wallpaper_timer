@@ -27,52 +27,51 @@ until_20=$(( $(date -d 2000 +%s) - $(date +%s) ))
 until_22=$(( $(date -d 2200 +%s) - $(date +%s) ))
 until_24=$(( $(date -d 2359 +%s) - $(date +%s) ))
 
-if [ $until_02 -lt 0 ]; then
-    echo Staying at 1
-    feh --bg-fill ~/.wallpaper/wallpaper1.jpeg
-fi
-if [ $until_04 -lt 0 ]; then
+
+echo Starting at 1
+feh --bg-fill ~/.wallpaper/wallpaper1.jpeg
+if [ $until_02 -lt 0 ]; then # Past 02:00
     echo Changing to 2
     ~/.wallpaper/transition ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_06 -lt 0 ]; then
-    echo Changing to 2
+if [ $until_04 -lt 0 ]; then # Past 04:00
+    echo Changing to 3
     ~/.wallpaper/transition ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_08 -lt 0 ]; then
-    echo Changing to 3
+if [ $until_06 -lt 0 ]; then # Past 06:00
+    echo Changing to 2
     ~/.wallpaper/transition ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_10 -lt 0 ]; then
-    echo Changing to 4
+if [ $until_08 -lt 0 ]; then # Past 08:00
+    echo Changing to 5
     ~/.wallpaper/transition ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_12 -lt 0 ]; then
-    echo Changing to 5
+if [ $until_10 -lt 0 ]; then
+    echo Changing to 6
     ~/.wallpaper/transition ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_14 -lt 0 ]; then
-    echo Changing to 6
+if [ $until_12 -lt 0 ]; then
+    echo Changing to 7
     ~/.wallpaper/transition ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_16 -lt 0 ]; then
-    echo Changing to 7
+if [ $until_14 -lt 0 ]; then
+    echo Changing to 8
     ~/.wallpaper/transition ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_18 -lt 0 ]; then
-    echo Changing to 8
+if [ $until_16 -lt 0 ]; then
+    echo Changing to 9
     ~/.wallpaper/transition ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_20 -lt 0 ]; then
-    echo Changing to 9
+if [ $until_18 -lt 0 ]; then
+    echo Changing to 10
     ~/.wallpaper/transition ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_22 -lt 0 ]; then
-    echo Changing to 10
+if [ $until_20 -lt 0 ]; then
+    echo Changing to 11
     ~/.wallpaper/transition ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/transitions
 fi
-if [ $until_24 -lt 0 ]; then
-    echo Changing to 11
+if [ $until_22 -lt 0 ]; then
+    echo Changing to 12
     ~/.wallpaper/transition ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/wallpaper12.jpeg ~/.wallpaper/transitions
 fi
 
@@ -90,66 +89,66 @@ while [ 1 ]; do
 	until_22=$(( $(date -d 2200 +%s) - $(date +%s) ))
 	until_24=$(( $(date -d 2359 +%s) - $(date +%s) ))
 
-	if [ $until_02 -gt 0 ]; then
-		echo Changing from 12 to 1 in $until_02
+	if [ $until_02 -gt 0 ]; then # time is 00:00 - 01:59
+		echo Changing from 1 to 2 in $until_02
 		sleep $until_02
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper12.jpeg ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/transitions
-	elif [ $until_04 -gt 0 ]; then
-		echo Changing from 1 to 2 in $until_04
+		~/.wallpaper/transition ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/transitions
+	elif [ $until_04 -gt 0 ]; then # time is 02:00 - 03:59
+		echo Changing from 2 to 3 in $until_04
 		sleep $until_04
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/transitions
 	elif [ $until_06 -gt 0 ]; then
-		echo Changing from 2 to 3 in $until_06
+		echo Changing from 3 to 4 in $until_06
 		sleep $until_06
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/transitions
 	elif [ $until_08 -gt 0 ]; then
-		echo Changing from 3 to 4 in $until_08
+		echo Changing from 4 to 5 in $until_08
 		sleep $until_08
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/transitions
 	elif [ $until_10 -gt 0 ]; then
-		echo Changing from 4 to 5 in $until_10
+		echo Changing from 5 to 6 in $until_10
 		sleep $until_10
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/transitions
 	elif [ $until_12 -gt 0 ]; then
-		echo Changing from 5 to 6 in $until_12
+		echo Changing from 6 to 7 in $until_12
 		sleep $until_12
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/transitions
 	elif [ $until_14 -gt 0 ]; then
-		echo Changing from 6 to 7 in $until_14
+		echo Changing from 7 to 8 in $until_14
 		sleep $until_14
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/transitions
 	elif [ $until_16 -gt 0 ]; then
-		echo Changing from 7 to 8 in $until_16
+		echo Changing from 8 to 9 in $until_16
 		sleep $until_16
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/transitions
 	elif [ $until_18 -gt 0 ]; then
-		echo Changing from 8 to 9 in $until_18
+		echo Changing from 9 to 10 in $until_18
 		sleep $until_18
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/transitions
 	elif [ $until_20 -gt 0 ]; then
-		echo Changing from 9 to 10 in $until_20
+		echo Changing from 10 to 11 in $until_20
 		sleep $until_20
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/transitions
 	elif [ $until_22 -gt 0 ]; then
-		echo Changing from 10 to 11 in $until_22
+		echo Changing from 11 to 12 in $until_22
 		sleep $until_22
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/wallpaper12.jpeg ~/.wallpaper/transitions
 	elif [ $until_24 -gt 0 ]; then
-		echo Changing from 11 to 12 in $until_24
+		echo Changing from 12 to 1 in $until_24
 		sleep $until_24
 		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/wallpaper12.jpeg ~/.wallpaper/transitions
+		~/.wallpaper/transition ~/.wallpaper/wallpaper12.jpeg ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/transitions
 		sleep 60
 	fi 
 done
