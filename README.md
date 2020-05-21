@@ -118,7 +118,7 @@ Install yay for AUR management:
 Install the graphical environment and the things needed for my dotfiles to work:
 
     # I selected noto fonts when asked
-    yay -S xf86-video-intel xorg xorg-xinit lightdm lightdm-slick-greeter i3-gaps kitty noto-font mate-polkit
+    yay -S xorg xorg-xinit lightdm lightdm-slick-greeter i3-gaps kitty noto-font mate-polkit
     # Change [Seat:*] to set greeter to lightdm-slick-greeter
     sudo vim /etc/lightdm/lightdm.conf
     sudo systemctl enable lightdm.service
@@ -206,10 +206,17 @@ Install bumblebee for nvidia-optimus laptops:
     sudo pacman -S bumblebee mesa nvidia xf86-video-intel lib32-virtualgl lib32-nvidia-utils mesa-demos tlp
     sudo systemctl enable tlp.service
     sudo systemctl start tlp.service
+    
     # Check the interface id with:
     lspci | grep "NVIDIA" | cut -b -8
     # Then add it to RUNTIME_PM_BLACKLIST in 
     sudo -E nvim /etc/tlp.conf
+    
+    # Add the following 2 lines to /etc/modprobe.d/blacklist-nouveau.conf to block nouveau drivers
+    # blacklist nouveau
+    # options nouveau modeset=0
+    sudo -E nvim /etc/modprobe.d/blacklist-nouveau.conf
+    
     gpasswd -a pedro bumblebee
     sudo systemctl enable bumblebeed.service
     reboot
