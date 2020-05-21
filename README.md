@@ -2,6 +2,14 @@
 This repository contains my setup's dotfiles.
 Some directory names are hard-coded into some dotfiles, so make sure you check each file before downloading them!
 
+    alias dotfiles='/usr/bin/git --git-dir$HOME/.dotfiles --work-tree=$HOME'
+    echo ".dotfiles" > .gitignore
+
+    git clone --bare https://github.com/Fowlron/dotfiles.git $HOME/.dotfiles
+
+    dotfiles stash
+    dotfiles checkout
+
 # Instalation
 In this section I'll be detailing exactly how I installed my system. A lot of this will not be applicable to everyone, I'm writing it mostly as a note to myself for future reference.
 
@@ -77,7 +85,7 @@ On the installed system, we now add the sudo user:
     groupadd sudo
     #Edit /etc/sudoers to allow the sudo group
     #Add the user (-m to create home directory, -G to add to groups, -s to select shell)
-    useradd -m -G sudo wheel -s /bin/bash pedro
+    useradd -m -G sudo,wheel -s /bin/bash pedro
     #Set user password
     passwd pedro
 
@@ -110,7 +118,7 @@ Install yay for AUR management:
 Install the graphical environment and the things needed for my dotfiles to work:
 
     # I selected noto fonts when asked
-    yay -S xf86-video-intel xorg xorg-xinit lightdm lightdm-slick-greeter i3-gaps kitty noto-fonts
+    yay -S xf86-video-intel xorg xorg-xinit lightdm lightdm-slick-greeter i3-gaps kitty noto-font mate-polkit
     # Change [Seat:*] to set greeter to lightdm-slick-greeter
     sudo vim /etc/lightdm/lightdm.conf
     sudo systemctl enable lightdm.service
