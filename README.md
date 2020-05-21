@@ -172,7 +172,7 @@ Setup fstab to auto mount the windows partition:
     ln -s /windows_shared ~/shared
     
     # add to fstab
-    # UUID=replace_with_partition_uuid	/windows_shared	ntfs-3g		defaults,dmask=027,umask=137,uid=1000,gid=1000	0 0
+    # UUID=replace_with_partition_uuid	/windows_shared	ntfs-3g		defaults,umask=000,dmask=027,fmask=137,uid=1000,gid=1001,windows_names 0 0
     sudo vim /etc/fstab
 
 Setup neovim:
