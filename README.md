@@ -222,5 +222,12 @@ Install bumblebee for nvidia-optimus laptops:
     sudo systemctl enable bumblebeed.service
     reboot
 
+Setup pwn stuff:
+
+    sudo pacman -S docker
+    sudo systemctl enable docker.service
+    sudo systemctl start docker.service
+    sudo usermod -aG docker pedro
+
 This is all I've done so far to make my system what it is. Following along (adapted to your own seutp) and downloading my dotfiles should leave you with a clone of my own system. Good luck!
 
