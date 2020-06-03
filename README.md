@@ -228,6 +228,7 @@ Setup pwn stuff:
     sudo systemctl enable docker.service
     sudo systemctl start docker.service
     sudo usermod -aG docker pedro
+    # You then need to download binary ninja and ghidra and extract them to the ~/.pwn/ghidra and~/.pwn/binaryninja folders
 
 This is all I've done so far to make my system what it is. Following along (adapted to your own seutp) and downloading my dotfiles should leave you with a clone of my own system. Good luck!
 
