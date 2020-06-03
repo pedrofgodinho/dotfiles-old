@@ -10,8 +10,12 @@ Some directory names are hard-coded into some dotfiles, so make sure you check e
     dotfiles stash
     dotfiles checkout
 
+    dotfiles config --local status.showUntrackedFiles no
+
 # Instalation
 In this section I'll be detailing exactly how I installed my system. A lot of this will not be applicable to everyone, I'm writing it mostly as a note to myself for future reference.
+
+DO NOT MINDLESSLY COPY THIS. This includes hardcoded usernames, gid's, and partitions. Read carefully.
 
 ## Arch Install
     #Load keyboard layout
@@ -81,11 +85,13 @@ On the installed system, we now add the sudo user:
     
     #Install sudo
     pacman -S sudo
-    #Add the sudo group
-    groupadd sudo
-    #Edit /etc/sudoers to allow the sudo group
     #Add the user (-m to create home directory, -G to add to groups, -s to select shell)
-    useradd -m -G sudo,wheel -s /bin/bash pedro
+    useradd -m -G wheel -s /bin/bash pedro
+    groupadd sudo
+
+    #Edit /etc/sudoers to allow the sudo group
+    EDITOR=vim visudo
+    usermod -aG sudo pedro
     #Set user password
     passwd pedro
 
@@ -130,8 +136,8 @@ Install the graphical environment and the things needed for my dotfiles to work:
     sudo pacman -S firefox ranger pcmanfm python python-pillow dmenu
     
     # Some other useful tools I use often
-    sudo pacman -S unzip p7zip tree neofetch wget lolcat fortune-mod cowsay cava vlc
-    yay -S ytop
+    sudo pacman -S unzip p7zip tree neofetch wget lolcat fortune-mod cowsay vlc
+    yay -S ytop cava
     
     # Wallpaper rotation
     sudo pacman -S feh imagemagick
@@ -141,7 +147,7 @@ Install the graphical environment and the things needed for my dotfiles to work:
     sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf
     
     # Install adi1090x's polybar theme 7
-    sudo pacman -S wireless_tools, light
+    sudo pacman -S wireless_tools light
     yay -S polybar
     
     # xbindkeys for fn keys
@@ -172,7 +178,7 @@ Setup fstab to auto mount the windows partition:
     ln -s /windows_shared ~/shared
     
     # add to fstab
-    # UUID=replace_with_partition_uuid	/windows_shared	ntfs-3g		defaults,umask=000,dmask=027,fmask=137,uid=1000,gid=1001,windows_names 0 0
+    # UUID=replace_with_partition_uuid	/windows_shared	ntfs-3g		defaults,umask=000,dmask=027,fmask=137,uid=1000,gid=1000,windows_names 0 0
     sudo vim /etc/fstab
 
 Setup neovim:
@@ -212,12 +218,7 @@ Install bumblebee for nvidia-optimus laptops:
     # Then add it to RUNTIME_PM_BLACKLIST in 
     sudo -E nvim /etc/tlp.conf
     
-    # Add the following 2 lines to /etc/modprobe.d/blacklist-nouveau.conf to block nouveau drivers
-    # blacklist nouveau
-    # options nouveau modeset=0
-    sudo -E nvim /etc/modprobe.d/blacklist-nouveau.conf
-    
-    gpasswd -a pedro bumblebee
+    sudo gpasswd -a pedro bumblebee
     sudo systemctl enable bumblebeed.service
     reboot
 
