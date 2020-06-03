@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# VERY UGLY AND HARD CODED SCRIPT 
-# Make sure you generate the transition files between wallpaper1-wallpaper2, wallpaper2-wallpaper3 ... wallpaper11-wallpaper12, wallpaper12-wallpaper1
-# Otherwise this script won't work
-
-
 # kill previously running versions of the script
 # only works if the versions of the script were run with the same script_name
 script_name=${BASH_SOURCE[0]}
@@ -14,142 +9,71 @@ for pid in $(pidof -x $script_name); do
     fi
 done
 
-until_02=$(( $(date -d 0200 +%s) - $(date +%s) ))
-until_04=$(( $(date -d 0400 +%s) - $(date +%s) ))
-until_06=$(( $(date -d 0600 +%s) - $(date +%s) ))
-until_08=$(( $(date -d 0800 +%s) - $(date +%s) ))
-until_10=$(( $(date -d 1000 +%s) - $(date +%s) ))
-until_12=$(( $(date -d 1200 +%s) - $(date +%s) ))
-until_14=$(( $(date -d 1400 +%s) - $(date +%s) ))
-until_16=$(( $(date -d 1600 +%s) - $(date +%s) ))
-until_18=$(( $(date -d 1800 +%s) - $(date +%s) ))
-until_20=$(( $(date -d 2000 +%s) - $(date +%s) ))
-until_22=$(( $(date -d 2200 +%s) - $(date +%s) ))
-until_24=$(( $(date -d 2359 +%s) - $(date +%s) ))
+# 02:00 Change to 2
+# 04:00 Change to 3
+# 06:00 Change to 4
+# 08:00 Change to 5
+# 10:00 Change to 6
+# 12:00 Change to 7
+# 14:00 Change to 8
+# 16:00 Change to 9
+# 18:00 Change to 10
+# 20:00 Change to 11
+# 22:00 Change to 12
+# 24:00 Change to 1 (Actually 23:59)
 
 
-echo Starting at 1
-feh --bg-fill ~/.wallpaper/wallpaper1.jpeg
-if [ $until_02 -lt 0 ]; then # Past 02:00
-    echo Changing to 2
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_04 -lt 0 ]; then # Past 04:00
-    echo Changing to 3
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_06 -lt 0 ]; then # Past 06:00
-    echo Changing to 2
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_08 -lt 0 ]; then # Past 08:00
-    echo Changing to 5
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_10 -lt 0 ]; then
-    echo Changing to 6
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_12 -lt 0 ]; then
-    echo Changing to 7
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_14 -lt 0 ]; then
-    echo Changing to 8
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_16 -lt 0 ]; then
-    echo Changing to 9
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_18 -lt 0 ]; then
-    echo Changing to 10
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_20 -lt 0 ]; then
-    echo Changing to 11
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/transitions
-fi
-if [ $until_22 -lt 0 ]; then
-    echo Changing to 12
-    ~/.wallpaper/transition ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/wallpaper12.jpeg ~/.wallpaper/transitions
+function update_times {
+    for i in {0..10}
+    do
+        time_until[$i]=$(( $(date -d $(((${i}+1) * 2))00 +%s) - $(date +%s) ))
+    done
+    time_until[11]=$(( $(date -d 2359 +%s) - $(date +%s) ))
+    echo Times: ${time_until[@]}
+}
+
+update_times
+
+# Rotate to what should be the current wallpaper
+#update_times
+echo Setting starting wallpaper to 1
+if [ ${time_until[11]} -lt 0 ]
+then
+    echo Edge case: time is between 23:59 and 00:00. Treating as 00:00 next day. Not transitioning.
+else
+    for i in {0..11}
+    do
+        if [ ${time_until[$i]} -lt 0 ]
+        then
+            echo Transitioning from $(($i+1)) to $(($i+2))
+            ~/.wallpaper/transition ~/.wallpaper/wallpaper$(($i+1)).jpeg ~/.wallpaper/wallpaper$(($i+2)).jpeg ~/.wallpaper/transitions
+        else
+            break
+        fi
+    done
 fi
 
-while [ 1 ]; do
-	until_02=$(( $(date -d 0200 +%s) - $(date +%s) ))
-	until_04=$(( $(date -d 0400 +%s) - $(date +%s) ))
-	until_06=$(( $(date -d 0600 +%s) - $(date +%s) ))
-	until_08=$(( $(date -d 0800 +%s) - $(date +%s) ))
-	until_10=$(( $(date -d 1000 +%s) - $(date +%s) ))
-	until_12=$(( $(date -d 1200 +%s) - $(date +%s) ))
-	until_14=$(( $(date -d 1400 +%s) - $(date +%s) ))
-	until_16=$(( $(date -d 1600 +%s) - $(date +%s) ))
-	until_18=$(( $(date -d 1800 +%s) - $(date +%s) ))
-	until_20=$(( $(date -d 2000 +%s) - $(date +%s) ))
-	until_22=$(( $(date -d 2200 +%s) - $(date +%s) ))
-	until_24=$(( $(date -d 2359 +%s) - $(date +%s) ))
-
-	if [ $until_02 -gt 0 ]; then # time is 00:00 - 01:59
-		echo Changing from 1 to 2 in $until_02
-		sleep $until_02
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/transitions
-	elif [ $until_04 -gt 0 ]; then # time is 02:00 - 03:59
-		echo Changing from 2 to 3 in $until_04
-		sleep $until_04
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper2.jpeg ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/transitions
-	elif [ $until_06 -gt 0 ]; then
-		echo Changing from 3 to 4 in $until_06
-		sleep $until_06
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper3.jpeg ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/transitions
-	elif [ $until_08 -gt 0 ]; then
-		echo Changing from 4 to 5 in $until_08
-		sleep $until_08
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper4.jpeg ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/transitions
-	elif [ $until_10 -gt 0 ]; then
-		echo Changing from 5 to 6 in $until_10
-		sleep $until_10
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper5.jpeg ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/transitions
-	elif [ $until_12 -gt 0 ]; then
-		echo Changing from 6 to 7 in $until_12
-		sleep $until_12
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper6.jpeg ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/transitions
-	elif [ $until_14 -gt 0 ]; then
-		echo Changing from 7 to 8 in $until_14
-		sleep $until_14
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper7.jpeg ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/transitions
-	elif [ $until_16 -gt 0 ]; then
-		echo Changing from 8 to 9 in $until_16
-		sleep $until_16
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper8.jpeg ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/transitions
-	elif [ $until_18 -gt 0 ]; then
-		echo Changing from 9 to 10 in $until_18
-		sleep $until_18
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper9.jpeg ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/transitions
-	elif [ $until_20 -gt 0 ]; then
-		echo Changing from 10 to 11 in $until_20
-		sleep $until_20
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper10.jpeg ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/transitions
-	elif [ $until_22 -gt 0 ]; then
-		echo Changing from 11 to 12 in $until_22
-		sleep $until_22
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper11.jpeg ~/.wallpaper/wallpaper12.jpeg ~/.wallpaper/transitions
-	elif [ $until_24 -gt 0 ]; then
-		echo Changing from 12 to 1 in $until_24
-		sleep $until_24
-		echo Changing...
-		~/.wallpaper/transition ~/.wallpaper/wallpaper12.jpeg ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/transitions
-		sleep 60
-	fi 
+while :
+do
+    update_times
+    for i in {0..11}
+    do
+        if [ ${time_until[$i]} -gt 0 ]
+        then
+            if [ $i -eq 11 ]
+            then
+                echo Transitioning from $(($i+1)) to 1 in ${time_until[$i]}
+                sleep ${time_until[$i]}
+                echo Transitioning from $(($i+1)) to 1
+                ~/.wallpaper/transition ~/.wallpaper/wallpaper$(($i+1)).jpeg ~/.wallpaper/wallpaper1.jpeg ~/.wallpaper/transitions
+                sleep 60
+            else
+                echo Transitioning from $(($i+1)) to $(($i+2)) in ${time_until[$i]}
+                sleep ${time_until[$i]}
+                echo Transitioning from $(($i+1)) to $(($i+2)) 
+                ~/.wallpaper/transition ~/.wallpaper/wallpaper$(($i+1)).jpeg ~/.wallpaper/wallpaper$(($i+2)).jpeg ~/.wallpaper/transitions
+            fi
+            break
+        fi
+    done
 done
-
