@@ -9,19 +9,19 @@ for pid in $(pidof -x $script_name); do
     fi
 done
 
-# 02:00 Change to 2
-# 04:00 Change to 3
-# 06:00 Change to 4
-# 08:00 Change to 5
-# 10:00 Change to 6
-# 12:00 Change to 7
-# 14:00 Change to 8
-# 16:00 Change to 9
-# 18:00 Change to 10
-# 20:00 Change to 11
-# 22:00 Change to 12
-# 24:00 Change to 1 (Actually 23:59)
-
+# What each array index means:
+# [00] time until 02:00. Then, change to 2
+# [01] time until 04:00. Then, change to 3
+# [02] time until 06:00. Then, change to 4
+# [03] time until 08:00. Then, change to 5
+# [04] time until 10:00. Then, change to 6
+# [05] time until 12:00. Then, change to 7
+# [06] time until 14:00. Then, change to 8
+# [07] time until 16:00. Then, change to 9
+# [08] time until 18:00. Then, change to 10
+# [09] time until 20:00. Then, change to 11
+# [10] time until 22:00. Then, change to 12
+# [11] time until 24:00. Then, change to 1 (Actually 23:59)
 
 function update_times {
     for i in {0..10}
