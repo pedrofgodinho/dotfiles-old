@@ -37,6 +37,7 @@ update_times
 # Rotate to what should be the current wallpaper
 #update_times
 echo Setting starting wallpaper to 1
+feh --bg-fill ~/.wallpaper/wallpaper1.jpeg
 if [ ${time_until[11]} -lt 0 ]
 then
     echo Edge case: time is between 23:59 and 00:00. Treating as 00:00 next day. Not transitioning.
