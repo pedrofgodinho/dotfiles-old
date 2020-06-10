@@ -147,7 +147,7 @@ Install the graphical environment and the things needed for my dotfiles to work:
     sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf
     
     # Install adi1090x's polybar theme 7
-    sudo pacman -S wireless_tools light
+    sudo pacman -S wireless_tools light networkmanager-openvpn nm-connection-editor
     yay -S polybar
     
     # xbindkeys for fn keys
