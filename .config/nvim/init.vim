@@ -7,6 +7,7 @@ Plug 'luochen1990/rainbow'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'bcicen/vim-vice'
 Plug 'jiangmiao/auto-pairs'
+Plug 'farmergreg/vim-lastplace'
 
 call plug#end()
 
