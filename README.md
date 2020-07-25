@@ -2,7 +2,7 @@
 This repository contains my setup's dotfiles.
 Some directory names are hard-coded into some dotfiles, so make sure you check each file before downloading them!
 
-    alias dotfiles='/usr/bin/git --git-dir$HOME/.dotfiles --work-tree=$HOME'
+    alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
     echo ".dotfiles" > .gitignore
 
     git clone --bare https://github.com/Fowlron/dotfiles.git $HOME/.dotfiles
@@ -22,7 +22,10 @@ DO NOT MINDLESSLY COPY THIS. This includes hardcoded usernames, gid's, and parti
     loadkeys pt-latin1
     
     #Connect to the internet
-    wifi-menu
+    iwctl
+    #station wlan0 scan
+    #station wlan0 get-networks
+    #station wlan0 connect SSID
     
     #Setup timedatectl
     timedatectl set-ntp true
@@ -74,6 +77,7 @@ Once chrooted into the new installation:
     grub-mkconfig -o /boot/grub/grub.cfg
     
     # Installation is done, we can reboot into the installed system
+    exit
     reboot
 
 On the installed system, we now add the sudo user:
@@ -86,12 +90,11 @@ On the installed system, we now add the sudo user:
     #Install sudo
     pacman -S sudo
     #Add the user (-m to create home directory, -G to add to groups, -s to select shell)
-    useradd -m -G wheel -s /bin/bash pedro
-    groupadd sudo
+    groupadd --gid 27 sudo
+    useradd -m -G sudo,wheel -s /bin/bash pedro
 
     #Edit /etc/sudoers to allow the sudo group
     EDITOR=vim visudo
-    usermod -aG sudo pedro
     #Set user password
     passwd pedro
 
@@ -106,7 +109,7 @@ Sort pacman mirrors (maybe I should've done this earlier):
     rankmirrors -n 12 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
     
     #Uncomment multilib on pacman config
-    #I also added colors and the ILoveCandy easter egg
+    #I also enabled colors and the ILoveCandy easter egg
     vim /etc/pacman.conf
 	
 	#Exit and login as the new user
@@ -123,8 +126,7 @@ Install yay for AUR management:
 
 Install the graphical environment and the things needed for my dotfiles to work:
 
-    # I selected noto fonts when asked
-    yay -S xorg xorg-xinit lightdm lightdm-slick-greeter i3-gaps kitty noto-font mate-polkit
+    yay -S xorg xorg-xinit lightdm lightdm-slick-greeter i3-gaps kitty noto-fonts mate-polkit
     # Change [Seat:*] to set greeter to lightdm-slick-greeter
     sudo vim /etc/lightdm/lightdm.conf
     sudo systemctl enable lightdm.service
@@ -143,7 +145,7 @@ Install the graphical environment and the things needed for my dotfiles to work:
     sudo pacman -S feh imagemagick
     
     # Correct natural scrolling
-    # Add Option "Natural Scrolling" "true" under the touchpad section
+    # Add 'Option "Natural Scrolling" "true"' under the touchpad section
     sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf
     
     # Install adi1090x's polybar theme 7
