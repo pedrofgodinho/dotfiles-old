@@ -8,7 +8,7 @@ function pwn-start {
            -h ${1} \
            --name ${1} \
            -v $(pwd)/${1}:/ctf/work \
-           -v $HOME/shared/ctf/glibc-all-in-one/libs:/ubuntu_libc \
+           -v $HOME/shared/ctf/libc_downloader:/libc_downloader \
            -p 23946:23946 \
            --cap-add=SYS_PTRACE \
            skysider/pwndocker
