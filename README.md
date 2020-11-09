@@ -159,7 +159,8 @@ Install the graphical environment and the things needed for my dotfiles to work:
     sudo pacman -S picom
     
     # pulseaudio setup
-    sudo pacman -S pulseaudio pulseaudio-alsa
+    sudo pacman -S pulseaudio pulseaudio-alsa pavucontrol
+    # might need to unmute microphone later. Can do so through pavucontrol
 
 Install zsh and oh-my-zsh
 
