@@ -1,4 +1,7 @@
 # My dotfiles
+***OLD AND UNMAINTAINED. KEEPING THIS ONLY FOR FUTURE REFERENCE***  
+**Please instead reference my [terminal dotfiles](https://github.com/pedrofgodinho/TerminalDotfiles) and [desktop dotfiles](https://github.com/pedrofgodinho/DesktopDotfiles).**
+
 This repository contains my setup's dotfiles.
 Some directory names are hard-coded into some dotfiles, so make sure you check each file before downloading them!
 
